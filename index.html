@@ -1,133 +1,471 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Yihao Ding, PhD — Personal Website</title>
-  <meta name="description" content="Personal website of Yihao Ding, PhD — Multimodal AI, VRDU, Document Intelligence.">
-  <link rel="stylesheet" href="assets/style.css">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Yihao Ding — AI Researcher</title>
+<meta name="description" content="Yihao Ding — Research Fellow at UWA. Multimodal learning, knowledge graphs, document intelligence."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#1a8a5f;--green-dark:#0f5c3e;--green-light:#e6f5ee;--green-mid:#9fd9bc;
+  --ink:#18181a;--ink-mid:#4a4a50;--ink-light:#8a8a94;
+  --cream:#faf9f6;--surface:#fff;--border:rgba(0,0,0,0.09);
+  --serif:'Lora',Georgia,serif;--sans:'Plus Jakarta Sans',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--sans);background:var(--cream);color:var(--ink);line-height:1.7;overflow-x:hidden}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:56px;padding:0 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(250,249,246,0.88);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:var(--serif);font-size:17px;color:var(--ink);text-decoration:none;letter-spacing:0.01em}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{
+  font-size:13px;color:var(--ink-light);text-decoration:none;
+  letter-spacing:0.04em;font-weight:400;text-transform:uppercase;
+  transition:color .2s;cursor:pointer;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--green)}
+
+/* ── LAYOUT ── */
+main{max-width:820px;margin:0 auto;padding:0 2rem}
+section{padding:5rem 0;border-bottom:1px solid var(--border)}
+section:last-child{border-bottom:none}
+
+/* ── HERO ── */
+#about{padding-top:7rem}
+.hero{display:grid;grid-template-columns:1fr 148px;gap:3rem;align-items:start}
+.hero-text h1{
+  font-family:var(--serif);font-size:clamp(28px,4vw,40px);
+  font-weight:400;line-height:1.15;margin-bottom:.35rem;color:var(--ink)
+}
+.hero-text h1 em{font-style:italic;color:var(--green)}
+.role{font-size:13px;font-weight:500;color:var(--green);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.3rem}
+.affil{font-size:13.5px;color:var(--ink-light);margin-bottom:1.5rem;line-height:1.5}
+.bio{font-size:15px;color:var(--ink-mid);line-height:1.8;margin-bottom:1.75rem}
+.links-row{display:flex;gap:.6rem;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:var(--sans);font-size:12.5px;font-weight:500;
+  padding:6px 16px;border-radius:100px;text-decoration:none;cursor:pointer;
+  border:1px solid var(--border);color:var(--ink-mid);background:var(--surface);
+  transition:all .15s;
+}
+.btn:hover{border-color:var(--green);color:var(--green);background:var(--green-light)}
+.btn.primary{background:var(--green);color:#fff;border-color:var(--green)}
+.btn.primary:hover{background:var(--green-dark)}
+
+.avatar{
+  width:148px;height:148px;border-radius:50%;
+  background:linear-gradient(135deg,var(--green-light),var(--green-mid));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:38px;color:var(--green-dark);
+  border:3px solid #fff;box-shadow:0 0 0 1px var(--border);
+  flex-shrink:0;
+}
+/* placeholder — swap for <img> */
+.avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+
+/* ── STATS ── */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:2.5rem 0 0}
+.stat{
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;
+  padding:1.1rem 1rem;text-align:center;
+}
+.stat-num{font-family:var(--serif);font-size:30px;color:var(--green);line-height:1}
+.stat-lbl{font-size:11.5px;color:var(--ink-light);margin-top:4px;letter-spacing:.03em}
+
+/* ── INTERESTS ── */
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:1.5rem}
+.tag{
+  font-size:12px;font-weight:500;padding:4px 13px;border-radius:100px;
+  background:var(--green-light);color:var(--green-dark);
+}
+
+/* ── SECTION HEADER ── */
+.sec-label{
+  font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--green);margin-bottom:.75rem;
+}
+.sec-title{
+  font-family:var(--serif);font-size:26px;font-weight:400;
+  color:var(--ink);margin-bottom:2rem;
+}
+
+/* ── NEWS ── */
+.news-list{display:flex;flex-direction:column}
+.news-item{
+  display:grid;grid-template-columns:90px 1fr;gap:1.25rem;
+  padding:1rem 0;border-bottom:1px solid var(--border);align-items:start;
+}
+.news-item:last-child{border-bottom:none}
+.news-date{font-size:12px;color:var(--ink-light);font-weight:500;letter-spacing:.04em;padding-top:2px}
+.news-body{font-size:14px;color:var(--ink-mid);line-height:1.6}
+.news-body strong{color:var(--green);font-weight:500}
+.chip{
+  display:inline-block;font-size:11px;font-weight:500;
+  padding:2px 8px;border-radius:100px;margin-left:4px;vertical-align:middle;
+}
+.chip.astar{background:#e6f5ee;color:#0f5c3e}
+.chip.award{background:#fff3e0;color:#8a5000}
+
+/* ── PUBLICATIONS ── */
+.pub-filters{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem}
+.pub-filters button{
+  font-family:var(--sans);font-size:12px;padding:5px 14px;border-radius:100px;
+  border:1px solid var(--border);background:var(--surface);color:var(--ink-light);
+  cursor:pointer;transition:all .15s;font-weight:500;
+}
+.pub-filters button:hover,.pub-filters button.active{
+  background:var(--green);color:#fff;border-color:var(--green);
+}
+.year-group{margin-bottom:2rem}
+.year-label{
+  font-size:11.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-light);padding-bottom:.6rem;border-bottom:1px solid var(--border);
+  margin-bottom:1rem;
+}
+.pub-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:1rem 1.25rem;margin-bottom:.65rem;
+  transition:border-color .2s,transform .15s;cursor:default;
+}
+.pub-card:hover{border-color:var(--green);transform:translateX(3px)}
+.pub-title{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:.3rem;line-height:1.45}
+.pub-authors{font-size:12.5px;color:var(--ink-light);margin-bottom:.4rem}
+.pub-authors strong{color:var(--ink-mid)}
+.venue-row{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.badge{font-size:11px;font-weight:500;padding:2px 10px;border-radius:100px}
+.badge.astar{background:#e6f5ee;color:#0f5c3e}
+.badge.a{background:#e8f0fb;color:#1a4e9f}
+.badge.journal{background:#fef3e2;color:#7a4800}
+.badge.conf{background:#f3eefe;color:#5e35b1}
+
+/* ── TEACHING ── */
+.teach-block{margin-bottom:2rem}
+.teach-block-title{
+  font-size:15px;font-weight:500;color:var(--ink);
+  display:flex;align-items:center;gap:.6rem;margin-bottom:.75rem;
+  padding-bottom:.5rem;border-bottom:1px solid var(--border);
+}
+.teach-block-title .tbadge{
+  font-size:11px;font-weight:500;padding:2px 9px;border-radius:100px;
+  background:var(--green-light);color:var(--green-dark);
+}
+.teach-row{
+  display:grid;grid-template-columns:1fr auto;gap:.75rem;
+  padding:.55rem 0;border-bottom:1px solid rgba(0,0,0,.05);align-items:start;
+}
+.teach-row:last-child{border-bottom:none}
+.teach-row .tr-title{font-size:13.5px;color:var(--ink)}
+.teach-row .tr-sub{font-size:12px;color:var(--ink-light)}
+.teach-row .tr-date{font-size:12px;color:var(--ink-light);white-space:nowrap;text-align:right}
+
+/* ── GRANTS ── */
+.grant-grid{display:flex;flex-direction:column;gap:.65rem}
+.grant-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:1rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;
+}
+.grant-name{font-size:14px;font-weight:500;color:var(--ink)}
+.grant-org{font-size:12.5px;color:var(--ink-light);margin-top:2px}
+.grant-amount{font-family:var(--serif);font-size:20px;color:var(--green);white-space:nowrap}
+
+/* ── FOOTER ── */
+footer{
+  text-align:center;padding:2.5rem 2rem;
+  font-size:12.5px;color:var(--ink-light);border-top:1px solid var(--border);
+}
+footer a{color:var(--green);text-decoration:none}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hero{animation:fadeUp .6s ease both}
+.stats{animation:fadeUp .6s .15s ease both}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .hero{grid-template-columns:1fr;gap:1.5rem}
+  .avatar{width:100px;height:100px;font-size:28px;order:-1}
+  .stats{grid-template-columns:1fr 1fr}
+  .stats .stat:last-child{grid-column:1/-1}
+  nav{padding:0 1rem}
+  main{padding:0 1rem}
+  .nav-links{gap:1.2rem}
+}
+</style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-grid">
-      <div class="profile-photo-wrapper">
-        <!-- Replace assets/profile.jpg with your own photo (keep the same filename) -->
-        <img src="assets/profile.jpg" alt="Your photo placeholder" class="profile-photo">
-      </div>
-      <div class="headline">
-        <h1>Yihao Ding, PhD</h1>
-        <p class="subtitle">Research Fellow · Multimodal Learning · Visually Rich Document Understanding</p>
-        <p class="links">
-          <a href="mailto:dr.yihao.ding@gmail.com">dr.yihao.ding@gmail.com</a> ·
-          <a href="https://scholar.google.com/citations?hl=en&user=A2onD9gAAAAJ" target="_blank" rel="noopener">Google Scholar</a> ·
-          <a href="https://github.com/your-github-username" target="_blank" rel="noopener">GitHub</a> ·
-          <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener">LinkedIn</a>
-        </p>
-        <p class="counter">Visits: <span id="visit-count">—</span></p>
-      </div>
-    </div>
-  </header>
 
-  <main class="container">
-    <section id="about">
-      <h2>About</h2>
-      <p>
-        I am a Research Fellow at the School of Physics, Mathematics and Computing, University of Western Australia.
-        My work focuses on deep learning for visually rich document understanding, multimodal learning, graph neural
-        networks, and large language models (LLMs), with applications in geoscience and beyond.
+<nav>
+  <a class="nav-logo" href="#about">Yihao Ding</a>
+  <div class="nav-links">
+    <a href="#about" class="active" onclick="setActive(this)">About</a>
+    <a href="#news" onclick="setActive(this)">News</a>
+    <a href="#publications" onclick="setActive(this)">Publications</a>
+    <a href="#teaching" onclick="setActive(this)">Teaching</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ══════════════════ ABOUT ══════════════════ -->
+<section id="about">
+  <div class="hero">
+    <div class="hero-text">
+      <div class="role">Research Fellow · Academic Level B</div>
+      <h1>Yihao Ding, <em>PhD</em></h1>
+      <div class="affil">
+        School of Physics, Mathematics and Computing<br>
+        University of Western Australia · Perth, WA
+      </div>
+      <p class="bio">
+        I am an AI researcher focused on multimodal learning, knowledge graphs, and document intelligence. My work spans visually rich document understanding, LLM-based data integration, and AI for geoscience. I publish regularly at venues including CVPR, IJCAI, ACL, ICLR and leading journals with impact factors above 10.
       </p>
-    </section>
-
-    <section id="experience">
-      <h2>Experience</h2>
-      <div class="item">
-        <h3>Research Fellow, Academic Level B <span class="when">Jul 2025 – Present</span></h3>
-        <p><em>School of Physics, Mathematics and Computing, University of Western Australia — Perth, WA</em></p>
-        <ul>
-          <li>Research on knowledge graphs and multimodal learning for geoscience applications.</li>
-          <li>Designing an LLM-based platform for data integration and human-in-the-loop insights.</li>
-          <li>Supervising research students on AI-driven geoscience projects.</li>
-          <li>Translating AI models into practical tools through academic–industry collaboration.</li>
-        </ul>
+      <div class="links-row">
+        <a class="btn primary" href="https://scholar.google.com/citations?hl=en&user=A2onD9gAAAAJ" target="_blank">&#128196; Google Scholar</a>
+        <a class="btn" href="https://github.com/yihaoding" target="_blank">&#128279; GitHub</a>
+        <a class="btn" href="mailto:dr.yihao.ding@gmail.com">&#9993; Email</a>
       </div>
-      <div class="item">
-        <h3>Postdoctoral Research Fellow, Academic Level A <span class="when">Aug 2024 – Jan 2025</span></h3>
-        <p><em>Faculty of Engineering and Information Technology, University of Melbourne — Melbourne, VIC</em></p>
-        <ul>
-          <li>Applied advanced multimodal techniques to real-world, industry-relevant problems.</li>
-          <li>Collaborated across disciplines to build impactful AI solutions.</li>
-          <li>Mentored graduate students and junior researchers.</li>
-        </ul>
-      </div>
-      <div class="item">
-        <h3>Research Assistant <span class="when">Mar 2023 – Dec 2023</span></h3>
-        <p><em>School of Earth Science, University of Western Australia — Perth, WA</em></p>
-        <ul>
-          <li>Built a mining-report retrieval & QA chatbot; created domain datasets; designed specialized models.</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="education">
-      <h2>Education</h2>
-      <ul class="bulleted">
-        <li><strong>PhD, The University of Sydney</strong> — Mar 2021 – Nov 2024 (Supervisors: Dr. Caren Han, Dr. Josiah Poon)</li>
-        <li><strong>MInfTech, The University of Sydney</strong> — Jul 2019 – Jun 2020</li>
-        <li><strong>MGeospatialEng, UNSW</strong> — Feb 2017 – Dec 2018</li>
-        <li><strong>BSc (GIS), Hefei University of Technology</strong> — Aug 2011 – Jun 2015</li>
-      </ul>
-    </section>
-
-    <section id="publications">
-      <h2>Selected Publications</h2>
-      <ul class="bulleted">
-        <li>VRD-IU: Lesson from the Competition on Visually Rich Document Intelligence and Understanding. <em>IJCAI 2025</em>.</li>
-        <li>MMVQA: A Dataset for Multimodal Information Retrieval in PDF-based VQA. <em>IJCAI 2024</em>.</li>
-        <li>3MVRD: Multi-modal Multi-task Multi-teacher Visually-Rich Form Document Understanding. <em>ACL 2024 Findings</em>.</li>
-        <li>Form-NLU: Dataset for the Form Natural Language Understanding. <em>SIGIR 2023</em>.</li>
-        <li>PDF-VQA: A Dataset for VQA on PDF Documents. <em>ECML-PKDD 2023</em>.</li>
-        <li>V-Doc: Visual questions answered with Documents. <em>CVPR 2022</em>.</li>
-        <li>Doc-GCN: Heterogeneous GCNs for Document Layout Analysis. <em>COLING 2022</em> (Co-first Author).</li>
-      </ul>
-      <p class="note">Full list on <a href="https://scholar.google.com/citations?hl=en&user=A2onD9gAAAAJ" target="_blank" rel="noopener">Google Scholar</a>.</p>
-    </section>
-
-    <section id="awards">
-      <h2>Scholarships & Funding</h2>
-      <ul class="bulleted">
-        <li>Google Computer Science Research Program — PI, AUD 95,000 (2025)</li>
-        <li>Postgraduate Research Completion Scholarship — AUD 27,000 (2024)</li>
-      </ul>
-    </section>
-
-    <section id="service">
-      <h2>Workshops & Service</h2>
-      <ul class="bulleted">
-        <li>Organizer, MLLM for VRDU Tutorial — <em>IJCAI 2025</em></li>
-        <li>Organizer, Workshop on Document Understanding and Intelligence — <em>AAAI 2025</em></li>
-        <li>Organizer & Presenter, VRDU Tutorial — <em>IJCAI 2024</em></li>
-        <li>Competition Organizer, VRDU Tutorial — <em>IJCAI 2024</em></li>
-        <li>Organizer, First Document Intelligence Understanding Workshop — <em>CIKM 2023</em></li>
-        <li>Reviewer/Chair: ICLR, CVPR, ICCV, AAAI, ACMMM; IJCAI Competition Chairs (2024), IJCNN AC (2025); ARR Rolling, etc.</li>
-      </ul>
-    </section>
-
-    <section id="teaching">
-      <h2>Teaching & Supervision</h2>
-      <ul class="bulleted">
-        <li>TA: CITS4012 NLP; CITS2401 Intro to Engineering Computing (UWA)</li>
-        <li>TA: COMP5046 NLP; ENGG1810 Intro to Engineering Computing (USYD)</li>
-        <li>Capstone/Honours supervision across USYD and UWA; high-school outreach at UniMelb.</li>
-      </ul>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>© <span id="year"></span> Yihao Ding. Built with ❤️ and GitHub Pages.</p>
     </div>
-  </footer>
+    <div class="avatar">YD
+      <!-- Replace with: <img src="assets/profile.jpg" alt="Yihao Ding"> -->
+    </div>
+  </div>
 
-  <script src="assets/main.js"></script>
+  <div class="stats">
+    <div class="stat"><div class="stat-num">20+</div><div class="stat-lbl">Publications</div></div>
+    <div class="stat"><div class="stat-num">8×</div><div class="stat-lbl">A* top venues</div></div>
+    <div class="stat"><div class="stat-num">130K</div><div class="stat-lbl">AUD in grants</div></div>
+  </div>
+
+  <div style="margin-top:3rem">
+    <div class="sec-label">Research interests</div>
+    <div class="tags">
+      <span class="tag">Multimodal Learning</span>
+      <span class="tag">Document Intelligence</span>
+      <span class="tag">Knowledge Graphs</span>
+      <span class="tag">Visual Question Answering</span>
+      <span class="tag">Large Language Models</span>
+      <span class="tag">Information Extraction</span>
+      <span class="tag">GeoScience AI</span>
+      <span class="tag">Graph Neural Networks</span>
+      <span class="tag">Human-in-the-loop AI</span>
+      <span class="tag">Natural Language Processing</span>
+    </div>
+  </div>
+
+  <div style="margin-top:3rem">
+    <div class="sec-label">Education</div>
+    <div class="news-list">
+      <div class="news-item">
+        <div class="news-date">2021 – 2024</div>
+        <div class="news-body"><strong>Doctor of Philosophy</strong> · The University of Sydney<br><span style="font-size:12.5px;color:var(--ink-light)">Supervised by Dr. Caren Han &amp; Dr. Josiah Poon</span></div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">2019 – 2020</div>
+        <div class="news-body"><strong>Master of Information Technology</strong> · The University of Sydney</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">2017 – 2018</div>
+        <div class="news-body"><strong>Master of Geospatial Engineering</strong> · The University of New South Wales</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">2011 – 2015</div>
+        <div class="news-body"><strong>BSc Geographic Information System</strong> · Hefei University of Technology</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ NEWS ══════════════════ -->
+<section id="news">
+  <div class="sec-label">Latest updates</div>
+  <div class="sec-title">News</div>
+  <div class="news-list">
+    <div class="news-item"><div class="news-date">Apr 2026</div><div class="news-body">Organised tutorial <strong>Building KGs from Documents for Web Applications</strong> at WWW 2026 <span class="chip astar">A*</span>, Dubai, UAE.</div></div>
+    <div class="news-item"><div class="news-date">2026</div><div class="news-body"><strong>ToolTree</strong> accepted at ICLR 2026 — LLM tool planning via dual-feedback Monte Carlo Tree Search.</div></div>
+    <div class="news-item"><div class="news-date">2026</div><div class="news-body"><strong>Docs2Synth</strong> accepted at WWW 2026; <strong>NarrativeSense</strong> accepted at ACM Transactions on Computing for Healthcare.</div></div>
+    <div class="news-item"><div class="news-date">Jan 2026</div><div class="news-body">Co-authored paper on chest X-ray report generation accepted at <strong>AAAI 2026</strong> <span class="chip astar">A*</span>, Singapore.</div></div>
+    <div class="news-item"><div class="news-date">Jan 2026</div><div class="news-body">Organised community program <strong>Bias in Multimodal AI</strong> at AAAI 2026, Singapore.</div></div>
+    <div class="news-item"><div class="news-date">Dec 2025</div><div class="news-body"><strong>SynJAC</strong> accepted in <em>Information Fusion</em> (IF 15.5); survey paper accepted in <em>Artificial Intelligence Review</em> (IF 13.9).</div></div>
+    <div class="news-item"><div class="news-date">Sep 2025</div><div class="news-body"><strong>LPL3D</strong> accepted at IEEE TCSVT (IF 11.1).</div></div>
+    <div class="news-item"><div class="news-date">Aug 2025</div><div class="news-body">Led tutorial on <strong>MLLM for Visually Rich Document Understanding</strong> at IJCAI 2025 <span class="chip astar">A*</span>, Montreal.</div></div>
+    <div class="news-item"><div class="news-date">Jul 2025</div><div class="news-body">Promoted to <strong>Research Fellow Academic Level B</strong> at University of Western Australia.</div></div>
+    <div class="news-item"><div class="news-date">Jun 2025</div><div class="news-body"><strong>GO-N3RDet</strong> accepted at CVPR 2025 <span class="chip astar">A*</span>.</div></div>
+    <div class="news-item"><div class="news-date">May 2025</div><div class="news-body">Two papers accepted at <strong>ACL 2025 Findings</strong> <span class="chip astar">A*</span>: abstract visual reasoning &amp; NLP for evidence-based medicine.</div></div>
+    <div class="news-item"><div class="news-date">Apr 2025</div><div class="news-body"><strong>VRD-IU</strong> accepted at IJCAI 2025 <span class="chip astar">A*</span>.</div></div>
+    <div class="news-item"><div class="news-date">2025</div><div class="news-body">Awarded <strong>Google Computer Science Research Program</strong> grant (PI) — 95,000 AUD &amp; Google Cloud Research Credits — 7,500 AUD.</div></div>
+    <div class="news-item"><div class="news-date">2024</div><div class="news-body">Received <strong>ACMMM 2024 Outstanding Reviewer Award</strong>. <span class="chip award">Award</span></div></div>
+    <div class="news-item"><div class="news-date">2024</div><div class="news-body">Awarded <strong>Postgraduate Research Completion Grant</strong> (27,000 AUD) from the University of Sydney.</div></div>
+  </div>
+</section>
+
+<!-- ══════════════════ PUBLICATIONS ══════════════════ -->
+<section id="publications">
+  <div class="sec-label">Selected works</div>
+  <div class="sec-title">Publications</div>
+
+  <div class="pub-filters">
+    <button class="active" onclick="filterPubs('all',this)">All</button>
+    <button onclick="filterPubs('astar',this)">A* Conference</button>
+    <button onclick="filterPubs('journal',this)">Journal</button>
+    <button onclick="filterPubs('2026',this)">2026</button>
+    <button onclick="filterPubs('2025',this)">2025</button>
+    <button onclick="filterPubs('2024',this)">2024</button>
+    <button onclick="filterPubs('2022-23',this)">2022–23</button>
+  </div>
+
+  <div id="pub-container"></div>
+</section>
+
+<!-- ══════════════════ TEACHING ══════════════════ -->
+<section id="teaching">
+  <div class="sec-label">Mentorship &amp; instruction</div>
+  <div class="sec-title">Teaching</div>
+
+  <div class="teach-block">
+    <div class="teach-block-title">PhD supervision <span class="tbadge">Current</span></div>
+    <div class="teach-row"><div><div class="tr-title">Yiran Zhang — Foundation Model in GeoScience</div><div class="tr-sub">University of Melbourne</div></div><div class="tr-date">Feb 2026–present</div></div>
+    <div class="teach-row"><div><div class="tr-title">Biao Xiang — Multi-hop Long Document VQA</div><div class="tr-sub">University of Melbourne</div></div><div class="tr-date">Feb 2025–present</div></div>
+  </div>
+
+  <div class="teach-block">
+    <div class="teach-block-title">Master supervision <span class="tbadge">Current</span></div>
+    <div class="teach-row"><div><div class="tr-title">Dhita Putri Pratama — Visual Causal Reasoning Dataset</div><div class="tr-sub">University of Melbourne</div></div><div class="tr-date">Feb 2025–present</div></div>
+    <div class="teach-row"><div><div class="tr-title">Biao Xiang — Multi-hop Long Document VQA</div><div class="tr-sub">University of Melbourne</div></div><div class="tr-date">Feb 2025–present</div></div>
+  </div>
+
+  <div class="teach-block">
+    <div class="teach-block-title">Teaching assistant</div>
+    <div class="teach-row"><div><div class="tr-title">CITS4012 Natural Language Processing (Postgrad)</div><div class="tr-sub">University of Western Australia</div></div><div class="tr-date">2023</div></div>
+    <div class="teach-row"><div><div class="tr-title">CITS2401 Introduction to Engineering Computing (Undergrad)</div><div class="tr-sub">University of Western Australia</div></div><div class="tr-date">2022–2023</div></div>
+    <div class="teach-row"><div><div class="tr-title">COMP5046 Natural Language Processing (Postgrad)</div><div class="tr-sub">University of Sydney</div></div><div class="tr-date">2022</div></div>
+    <div class="teach-row"><div><div class="tr-title">ENGG1810 Introduction to Engineering Computing (Undergrad)</div><div class="tr-sub">University of Sydney</div></div><div class="tr-date">2022</div></div>
+  </div>
+
+  <div class="teach-block">
+    <div class="teach-block-title">Capstone project supervision</div>
+    <div class="teach-row"><div><div class="tr-title">Document Structure Understanding — geological reports (10 postgrad students)</div><div class="tr-sub">University of Western Australia</div></div><div class="tr-date">Aug–Dec 2023</div></div>
+    <div class="teach-row"><div><div class="tr-title">Document Structure Understanding — geological reports (6 postgrad students)</div><div class="tr-sub">University of Sydney</div></div><div class="tr-date">Aug–Dec 2023</div></div>
+    <div class="teach-row"><div><div class="tr-title">Form Understanding Dataset creation (12 postgrad students, 2 groups)</div><div class="tr-sub">University of Sydney</div></div><div class="tr-date">Feb–Jun 2022</div></div>
+    <div class="teach-row"><div><div class="tr-title">PDFVQA Dataset — medical &amp; scientific papers (18 postgrad students)</div><div class="tr-sub">University of Sydney</div></div><div class="tr-date">Aug–Dec 2021</div></div>
+    <div class="teach-row"><div><div class="tr-title">Tabular Data Understanding Model (co-supervised Aleksey Eremenko)</div><div class="tr-sub">University of Sydney</div></div><div class="tr-date">Jul–Nov 2021</div></div>
+  </div>
+
+  <div style="margin-top:3rem">
+    <div class="sec-label">Funding</div>
+    <div class="sec-title" style="font-size:22px;margin-bottom:1.25rem">Grants</div>
+    <div class="grant-grid">
+      <div class="grant-card">
+        <div><div class="grant-name">Google Computer Science Research Program (PI)</div><div class="grant-org">Google Research Inc. · 2025</div></div>
+        <div class="grant-amount">A$95,000</div>
+      </div>
+      <div class="grant-card">
+        <div><div class="grant-name">Google Cloud Research Credits Program</div><div class="grant-org">Google Cloud · 2025</div></div>
+        <div class="grant-amount">A$7,500</div>
+      </div>
+      <div class="grant-card">
+        <div><div class="grant-name">Postgraduate Research Completion Grant</div><div class="grant-org">University of Sydney · 2024</div></div>
+        <div class="grant-amount">A$27,000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Yihao Ding &nbsp;·&nbsp; University of Western Australia &nbsp;·&nbsp;
+  <a href="mailto:dr.yihao.ding@gmail.com">dr.yihao.ding@gmail.com</a> &nbsp;·&nbsp;
+  <a href="https://scholar.google.com/citations?hl=en&user=A2onD9gAAAAJ" target="_blank">Google Scholar</a>
+  </p>
+</footer>
+
+<script>
+/* ── Publications data ── */
+const pubs = [
+  {year:'2026',title:'Docs2Synth: A Synthetic Data Trained Retriever Framework for Scanned Visually Rich Documents Understanding',authors:'Ding Y., Sun Q., Wu P., Li S., Luo S., Liu W.',venue:'WWW 2026',type:'a'},
+  {year:'2026',title:'ToolTree: Efficient LLM Tool Planning via Dual-Feedback Monte Carlo Tree Search and Bidirectional Pruning',authors:'Yang S., Han C., Ding Y., Wang S., Hovy E.',venue:'ICLR 2026',type:'astar'},
+  {year:'2026',title:'A Disease-Aware Dual-Stage Framework for Chest X-ray Report Generation',authors:'Wu P., Dong H., Lin Y., Ding Y., Peng Y. (co-corresponding)',venue:'AAAI 2026',type:'astar'},
+  {year:'2026',title:'NarrativeSense: Predicting Affective States in University Students through Smartphone Sensing and Contextual Narratives',authors:'Zhang T., Li Y., Ding Y., Jia H., Kostakos V., D\'Alfonso S.',venue:'ACM TOCHI 2026',type:'journal'},
+  {year:'2025',title:'SynJAC: Synthetic-data-driven Joint-granular Adaptation and Calibration for Domain Specific Scanned Document Key Information Extraction',authors:'Ding Y., Han C., Li Z., Chung H.',venue:'Information Fusion (IF 15.5)',type:'journal'},
+  {year:'2025',title:'Deep Learning based Visually Rich Document Content Understanding: A Survey',authors:'Ding Y., Han C., Lee J., Hovy E.',venue:'Artificial Intelligence Review (IF 13.9)',type:'journal'},
+  {year:'2025',title:'VRD-IU: Lesson from the Competition on Visually Rich Document Intelligence and Understanding',authors:'Ding Y., Han C., Li Y., Poon J.',venue:'IJCAI 2025',type:'astar'},
+  {year:'2025',title:'Beyond Perception: Evaluating Abstract Visual Reasoning through Multi-Stage Task',authors:'Jiang Y., Ding Y., Lei C., Ao J., Lau J., Ehinger K.',venue:'ACL 2025 Findings',type:'astar'},
+  {year:'2025',title:'Natural Language Processing in Support of Evidence-based Medicine: A Scoping Review',authors:'Xu Z., Ma H., Zhang G., Ding Y., Weng C., Peng Y.',venue:'ACL 2025 Findings',type:'astar'},
+  {year:'2025',title:'GO-N3RDet: Geometry Optimized NeRF-enhanced 3D Object Detector',authors:'Li Z., Yu H., Ding Y., Qiao J., Azam B., Akhtar N.',venue:'CVPR 2025',type:'astar'},
+  {year:'2025',title:'LPL3D: LVLM-driven Pseudo-Labeling for 3D Object Detection',authors:'Li Z., Yu H., Ding Y., Yuan S., Akhtar N.',venue:'IEEE TCSVT (IF 11.1)',type:'journal'},
+  {year:'2025',title:'Embodied Intelligence for 3D Understanding: A Survey on 3D Scene Question Answering',authors:'Li Z., Yu H., Ding Y., Li Y., He Y., Akhtar N.',venue:'Information Fusion (IF 15.5)',type:'journal'},
+  {year:'2024',title:'MMVQA: A Dataset for Multimodal Information Retrieval in PDF-based Visual Question Answering',authors:'Ding Y., Ren K., Huang J., Luo S., Han C.',venue:'IJCAI 2024',type:'astar'},
+  {year:'2024',title:'3MVRD: Multimodal Multi-task Multi-teacher Visually-Rich Form Document Understanding',authors:'Ding Y., Vaiani L., Han C., Lee J., Garza P., Poon J., Cagliero L.',venue:'ACL 2024 Findings',type:'astar'},
+  {year:'2024',title:'Graph Neural Networks for Text Classification: A Survey',authors:'Wang K., Ding Y., Han C.',venue:'Artificial Intelligence Review 57(8) (IF 13.9)',type:'journal'},
+  {year:'2024',title:'Predicting the Performance of Lithium Adsorption and Recovery from Unconventional Water Sources with Machine Learning',authors:'Xu Z., Ding Y., Han C., Zhang C.',venue:'Water Research (IF 12.4)',type:'journal'},
+  {year:'2023',title:'Form-NLU: Dataset for the Form Natural Language Understanding',authors:'Ding Y., Long S., Huang J., Ren K., Luo X., Chung H., Han C.',venue:'SIGIR 2023',type:'astar'},
+  {year:'2023',title:'PDF-VQA: A Dataset for VQA on PDF Documents',authors:'Ding Y., Luo S., Chung H., Han C.',venue:'ECML-PKDD 2023',type:'a'},
+  {year:'2022',title:'V-Doc: Visual Questions Answered with Documents',authors:'Ding Y., Zhe H., Wang R., Zhang Y., Chen X., Ma Y., Chung H., Han C.',venue:'CVPR 2022',type:'astar'},
+  {year:'2022',title:'Doc-GCN: Heterogeneous Graph Convolutional Networks for Document Layout Analysis',authors:'Ding Y.*, Luo S.* (co-first), Long S., Poon J., Han C.',venue:'COLING 2022',type:'a'},
+];
+
+function renderPubs(list){
+  const years=[...new Set(list.map(p=>p.year))].sort((a,b)=>b-a);
+  const container=document.getElementById('pub-container');
+  container.innerHTML='';
+  if(!list.length){container.innerHTML='<p style="color:var(--ink-light);font-size:14px">No publications match this filter.</p>';return}
+  years.forEach(yr=>{
+    const group=list.filter(p=>p.year===yr);
+    const ygEl=document.createElement('div');
+    ygEl.className='year-group';
+    ygEl.innerHTML='<div class="year-label">'+yr+'</div>'+
+      group.map(p=>`<div class="pub-card">
+        <div class="pub-title">${p.title}</div>
+        <div class="pub-authors">${p.authors.replace('Ding Y.','<strong>Ding Y.</strong>')}</div>
+        <div class="venue-row"><span class="badge ${p.type}">${p.venue}</span></div>
+      </div>`).join('');
+    container.appendChild(ygEl);
+  });
+}
+
+function filterPubs(filter,btn){
+  document.querySelectorAll('.pub-filters button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  let list=pubs;
+  if(filter==='astar') list=pubs.filter(p=>p.type==='astar');
+  else if(filter==='journal') list=pubs.filter(p=>p.type==='journal');
+  else if(filter==='2026') list=pubs.filter(p=>p.year==='2026');
+  else if(filter==='2025') list=pubs.filter(p=>p.year==='2025');
+  else if(filter==='2024') list=pubs.filter(p=>p.year==='2024');
+  else if(filter==='2022-23') list=pubs.filter(p=>p.year==='2022'||p.year==='2023');
+  renderPubs(list);
+}
+
+renderPubs(pubs);
+
+/* ── Active nav on scroll ── */
+function setActive(el){
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  el.classList.add('active');
+}
+const sections=document.querySelectorAll('section[id]');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      document.querySelectorAll('.nav-links a').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id);
+      });
+    }
+  });
+},{rootMargin:'-40% 0px -55% 0px'});
+sections.forEach(s=>observer.observe(s));
+</script>
 </body>
 </html>
